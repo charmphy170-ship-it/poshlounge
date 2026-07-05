@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posh Cuisine & Lounge | Fine Dining in Owerri</title>
+    <meta name="description" content="Owerri's premier destination for fine dining, artisan cocktails, and sophisticated nightlife. Experience luxury cuisine at Posh Cuisine & Lounge.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #C9A96E;
+            --gold-light: #D4B87A;
+            --dark: #0F0F0F;
+            --dark-lighter: #1A1A1A;
+            --dark-card: #141414;
+            --text: #F5F0E8;
+            --text-muted: #A8A29E;
+            --text-dim: #6B6560;
+            --border: rgba(201, 169, 110, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--text); font-weight: 400; }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--dark) !important;
+            padding: 0.6rem 1.8rem;
+            border-radius: 2px;
+            font-weight: 600 !important;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover { background: var(--gold-light); }
+        .nav-cta::after { display: none !important; }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--gold);
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 20%, rgba(201, 169, 110, 0.05) 0%, transparent 40%),
+                linear-gradient(180deg, var(--dark) 0%, var(--dark-lighter) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(201, 169, 110, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(201, 169, 110, 0.4);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 7rem 5%; position: relative; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .section-title em { font-style: italic; color: var(--gold); }
+
+        .section-desc {
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--dark-lighter);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-images {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-img {
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+
+        .about-img:hover img { transform: scale(1.05); }
+
+        .about-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(15,15,15,0.6) 100%);
+        }
+
+        .about-img:nth-child(2) { margin-top: 2rem; }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .about-text h3 em { color: var(--gold); font-style: italic; }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat h4 {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat span {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===== MENU ===== */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 0.7rem 1.8rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .menu-tab:hover { border-color: var(--gold); color: var(--gold); }
+        .menu-tab.active {
+            background: var(--gold);
+            color: var(--dark);
+            border-color: var(--gold);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.8rem;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .menu-card:hover {
+            border-color: rgba(201, 169, 110, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .menu-card .price {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .menu-card p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .menu-card .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(201, 169, 110, 0.1);
+            color: var(--gold);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            margin-top: 0.8rem;
+        }
+
+        /* ===== EXPERIENCE / FEATURES ===== */
+        .features {
+            background: var(--dark-lighter);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.4s;
+            background: var(--dark-card);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(201, 169, 110, 0.25);
+            transform: translateY(-6px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 15, 15, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after { opacity: 1; }
+
+        .gallery-item span {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 2;
+            color: var(--text);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .gallery-item:hover span { opacity: 1; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            background: var(--dark-lighter);
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slide {
+            display: none;
+            animation: fadeIn 0.6s;
+        }
+
+        .testimonial-slide.active { display: block; }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .testimonial-slide p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #8B7355);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .author-info { text-align: left; }
+        .author-info h5 { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .author-info span { font-size: 0.75rem; color: var(--text-dim); }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+        /* ===== RESERVATION ===== */
+        .reservation {
+            background: 
+                linear-gradient(rgba(15,15,15,0.92), rgba(15,15,15,0.92)),
+                url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600') center/cover;
+            text-align: center;
+        }
+
+        .reservation-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--gold);
+            background: rgba(201, 169, 110, 0.05);
+        }
+
+        .form-group input::placeholder { color: var(--text-dim); }
+
+        .reservation-form .btn-primary {
+            grid-column: span 3;
+            margin-top: 1rem;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid var(--border);
+            padding: 5rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-brand .logo { margin-bottom: 1rem; display: inline-block; }
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 300px;
+        }
+
+        .footer-col h5 {
+            color: var(--text);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.8rem; }
+        .footer-col a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .about-images { max-width: 500px; margin: 0 auto; }
+            .features-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .reservation-form { grid-template-columns: 1fr; }
+            .reservation-form .btn-primary { grid-column: span 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .about-stats { flex-wrap: wrap; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+    <div class="logo">POSH <span>Cuisine</span></div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reservation" class="nav-cta">Reserve a Table</a></li>
+    </ul>
+    <div class="mobile-toggle" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <p class="hero-subtitle">Welcome to Posh Cuisine & Lounge</p>
+        <h1>Where Every Bite is <em>Extraordinary</em></h1>
+        <p class="hero-desc">Experience the finest dining in Owerri. A sophisticated lounge where exquisite flavors meet elegant ambiance, crafted for those who appreciate the art of good living.</p>
+        <div class="hero-buttons">
+            <a href="#menu" class="btn btn-primary">Explore Menu</a>
+            <a href="#reservation" class="btn btn-outline">Book a Table</a>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+    <div class="about-grid reveal">
+        <div class="about-images">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600" alt="Elegant dining interior">
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Gourmet plated dish">
+            </div>
+        </div>
+        <div class="about-text">
+            <span class="section-label">Our Story</span>
+            <h3>A Taste of <em>Luxury</em> in Owerri</h3>
+            <p>Posh Cuisine & Lounge is Owerri's premier destination for fine dining and sophisticated nightlife. We blend contemporary culinary artistry with warm Nigerian hospitality to create unforgettable experiences.</p>
+            <p>From our handcrafted cocktails to our signature grilled specialties, every detail is designed to delight your senses. Whether you're celebrating a special occasion or simply unwinding after a long day, Posh offers the perfect setting.</p>
+            <div class="about-stats">
+                <div class="stat">
+                    <h4>5+</h4>
+                    <span>Years of Excellence</span>
+                </div>
+                <div class="stat">
+                    <h4>50+</h4>
+                    <span>Signature Dishes</span>
+                </div>
+                <div class="stat">
+                    <h4>1000+</h4>
+                    <span>Happy Guests</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu">
+    <div class="section-header reveal">
+        <span class="section-label">Culinary Delights</span>
+        <h2 class="section-title">Our <em>Signature</em> Menu</h2>
+        <p class="section-desc">From sizzling grills to handcrafted cocktails, explore our curated selection of premium offerings.</p>
+    </div>
+
+    <div class="menu-tabs reveal">
+        <button class="menu-tab active" onclick="filterMenu('all', this)">All</button>
+        <button class="menu-tab" onclick="filterMenu('grill', this)">Grilled</button>
+        <button class="menu-tab" onclick="filterMenu('rice', this)">Rice & Pasta</button>
+        <button class="menu-tab" onclick="filterMenu('specials', this)">Finger Specials</button>
+        <button class="menu-tab" onclick="filterMenu('drinks', this)">Drinks</button>
+    </div>
+
+    <div class="menu-grid reveal" id="menuGrid">
+        <!-- Grilled -->
+        <div class="menu-card" data-category="grill">
+            <div class="menu-card-header">
+                <h4>Grilled Catfish</h4>
+                <span class="price">&#8358;5,500</span>
+            </div>
+            <p>Fresh catfish marinated in our signature spice blend, flame-grilled to perfection.</p>
+            <span class="tag">Chef's Pick</span>
+        </div>
+        <div class="menu-card" data-category="grill">
+            <div class="menu-card-header">
+                <h4>Grilled Croaker Fish</h4>
+                <span class="price">&#8358;6,000</span>
+            </div>
+            <p>Whole croaker fish seasoned with herbs and slow-grilled for a smoky, tender finish.</p>
+        </div>
+        <div class="menu-card" data-category="grill">
+            <div class="menu-card-header">
+                <h4>Grilled Chicken</h4>
+                <span class="price">&#8358;4,500</span>
+            </div>
+            <p>Juicy chicken thighs marinated overnight and grilled over an open flame.</p>
+        </div>
+        <div class="menu-card" data-category="grill">
+            <div class="menu-card-header">
+                <h4>Grilled Turkey</h4>
+                <span class="price">&#8358;5,000</span>
+            </div>
+            <p>Tender turkey cuts basted in our special sauce and char-grilled to golden perfection.</p>
+        </div>
+        <div class="menu-card" data-category="grill">
+            <div class="menu-card-header">
+                <h4>East African Grill</h4>
+                <span class="price">&#8358;7,500</span>
+            </div>
+            <p>An exotic fusion platter inspired by East African spice traditions.</p>
+            <span class="tag">Signature</span>
+        </div>
+
+        <!-- Rice & Pasta -->
+        <div class="menu-card" data-category="rice">
+            <div class="menu-card-header">
+                <h4>Moroccan Rice</h4>
+                <span class="price">&#8358;4,000</span>
+            </div>
+            <p>Fragrant rice infused with Moroccan spices, dried fruits, and toasted nuts.</p>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="menu-card-header">
+                <h4>Seafood Rice</h4>
+                <span class="price">&#8358;5,500</span>
+            </div>
+            <p>Rich rice dish loaded with prawns, calamari, and fresh fish in a savory broth.</p>
+            <span class="tag">Popular</span>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="menu-card-header">
+                <h4>Chinese Fried Rice</h4>
+                <span class="price">&#8358;3,500</span>
+            </div>
+            <p>Classic wok-fried rice with vegetables, egg, and your choice of protein.</p>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="menu-card-header">
+                <h4>Spaghetti Alfredo</h4>
+                <span class="price">&#8358;4,500</span>
+            </div>
+            <p>Creamy parmesan sauce tossed with perfectly cooked spaghetti and grilled chicken.</p>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="menu-card-header">
+                <h4>Jollof Spaghetti</h4>
+                <span class="price">&#8358;3,500</span>
+            </div>
+            <p>A Nigerian twist on spaghetti, simmered in rich tomato-based jollof sauce.</p>
+        </div>
+
+        <!-- Finger Specials -->
+        <div class="menu-card" data-category="specials">
+            <div class="menu-card-header">
+                <h4>Peppered Goat Meat</h4>
+                <span class="price">&#8358;4,000</span>
+            </div>
+            <p>Tender goat meat tossed in a fiery pepper sauce &mdash; a true Nigerian classic.</p>
+            <span class="tag">Spicy</span>
+        </div>
+        <div class="menu-card" data-category="specials">
+            <div class="menu-card-header">
+                <h4>Spicy Snail</h4>
+                <span class="price">&#8358;5,000</span>
+            </div>
+            <p>Delicately prepared snails in a rich, spicy sauce with aromatic herbs.</p>
+        </div>
+        <div class="menu-card" data-category="specials">
+            <div class="menu-card-header">
+                <h4>Butterfly Prawns</h4>
+                <span class="price">&#8358;6,500</span>
+            </div>
+            <p>Crispy butterfly-cut prawns served with a tangy dipping sauce.</p>
+            <span class="tag">Must Try</span>
+        </div>
+        <div class="menu-card" data-category="specials">
+            <div class="menu-card-header">
+                <h4>Crispy Chicken Burger</h4>
+                <span class="price">&#8358;3,500</span>
+            </div>
+            <p>Golden crispy chicken fillet in a toasted bun with fresh veggies and our secret sauce.</p>
+        </div>
+        <div class="menu-card" data-category="specials">
+            <div class="menu-card-header">
+                <h4>Seafood Platter</h4>
+                <span class="price">&#8358;12,000</span>
+            </div>
+            <p>An indulgent spread of prawns, fish, calamari, and crab &mdash; perfect for sharing.</p>
+            <span class="tag">For 2-3</span>
+        </div>
+
+        <!-- Drinks -->
+        <div class="menu-card" data-category="drinks">
+            <div class="menu-card-header">
+                <h4>Mojito</h4>
+                <span class="price">&#8358;3,500</span>
+            </div>
+            <p>Refreshing blend of white rum, fresh mint, lime juice, and soda water.</p>
+        </div>
+        <div class="menu-card" data-category="drinks">
+            <div class="menu-card-header">
+                <h4>Long Island Iced Tea</h4>
+                <span class="price">&#8358;4,000</span>
+            </div>
+            <p>A bold mix of vodka, rum, tequila, gin, and triple sec with a splash of cola.</p>
+            <span class="tag">Strong</span>
+        </div>
+        <div class="menu-card" data-category="drinks">
+            <div class="menu-card-header">
+                <h4>Chapman Mocktail</h4>
+                <span class="price">&#8358;2,500</span>
+            </div>
+            <p>Nigeria's favorite non-alcoholic cocktail &mdash; fruity, colorful, and absolutely refreshing.</p>
+        </div>
+        <div class="menu-card" data-category="drinks">
+            <div class="menu-card-header">
+                <h4>Oreo Milkshake</h4>
+                <span class="price">&#8358;2,500</span>
+            </div>
+            <p>Creamy vanilla ice cream blended with Oreo cookies and topped with whipped cream.</p>
+        </div>
+        <div class="menu-card" data-category="drinks">
+            <div class="menu-card-header">
+                <h4>Hennessy VSOP</h4>
+                <span class="price">&#8358;35,000</span>
+            </div>
+            <p>Premium cognac with rich, full-bodied flavor and a smooth, velvety finish.</p>
+            <span class="tag">Premium</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="features">
+    <div class="section-header reveal">
+        <span class="section-label">Why Choose Us</span>
+        <h2 class="section-title">The Posh <em>Experience</em></h2>
+        <p class="section-desc">Every visit to Posh Cuisine & Lounge is designed to be memorable, from the first sip to the last bite.</p>
+    </div>
+
+    <div class="features-grid reveal">
+        <div class="feature-card">
+            <div class="feature-icon">&#127860;</div>
+            <h4>Exquisite Cuisine</h4>
+            <p>Our chefs craft every dish with premium ingredients, blending local Nigerian flavors with international culinary techniques.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#127864;</div>
+            <h4>Artisan Cocktails</h4>
+            <p>From classic mojitos to signature creations, our mixologists pour passion into every glass at our elegant bar.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#127925;</div>
+            <h4>Ambient Vibe</h4>
+            <p>Immerse yourself in a sophisticated atmosphere with curated music, ambient lighting, and plush seating.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+    <div class="section-header reveal">
+        <span class="section-label">Visual Feast</span>
+        <h2 class="section-title">Gallery <em>Moments</em></h2>
+        <p class="section-desc">A glimpse into the Posh experience &mdash; where every detail matters.</p>
+    </div>
+
+    <div class="gallery-grid reveal">
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500" alt="Interior">
+            <span>Elegant Interior</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Steak">
+            <span>Grilled Perfection</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500" alt="Cocktails">
+            <span>Signature Cocktails</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500" alt="Plating">
+            <span>Fine Plating</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500" alt="Drinks">
+            <span>Bar Selection</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500" alt="Food">
+            <span>Fresh Ingredients</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500" alt="Dining">
+            <span>Private Dining</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500" alt="Soup">
+            <span>Pepper Soup</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials">
+    <div class="section-header reveal">
+        <span class="section-label">Guest Reviews</span>
+        <h2 class="section-title">What Our <em>Guests</em> Say</h2>
+    </div>
+
+    <div class="testimonial-slider reveal">
+        <div class="testimonial-slide active">
+            <div class="quote-icon">&ldquo;</div>
+            <p>The ambiance at Posh is unmatched in Owerri. The grilled catfish was divine, and the cocktails were perfectly balanced. My go-to spot for date nights!</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">CA</div>
+                <div class="author-info">
+                    <h5>Chioma A.</h5>
+                    <span>Food Blogger, Owerri</span>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-slide">
+            <div class="quote-icon">&ldquo;</div>
+            <p>From the moment you walk in, you feel the luxury. The staff is attentive, the food is exceptional, and the lounge vibe is just right. Posh truly lives up to its name.</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">EO</div>
+                <div class="author-info">
+                    <h5>Emeka O.</h5>
+                    <span>Business Executive</span>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-slide">
+            <div class="quote-icon">&ldquo;</div>
+            <p>I celebrated my birthday here and it was magical. The seafood platter was generous and delicious, and the decor is Instagram-worthy. Highly recommend!</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">AB</div>
+                <div class="author-info">
+                    <h5>Adaobi B.</h5>
+                    <span>Lifestyle Influencer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonial-dots">
+        <button class="dot active" onclick="goToSlide(0)"></button>
+        <button class="dot" onclick="goToSlide(1)"></button>
+        <button class="dot" onclick="goToSlide(2)"></button>
+    </div>
+</section>
+
+<!-- ===== RESERVATION ===== -->
+<section class="reservation" id="reservation">
+    <div class="section-header reveal">
+        <span class="section-label">Book Your Table</span>
+        <h2 class="section-title">Make a <em>Reservation</em></h2>
+        <p class="section-desc">Reserve your spot for an unforgettable dining experience. Walk-ins are welcome, but booking ensures your preferred seating.</p>
+    </div>
+
+    <form class="reservation-form reveal" onsubmit="handleReservation(event)">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+234 ..." required>
+        </div>
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" required>
+        </div>
+        <div class="form-group">
+            <label>Time</label>
+            <select required>
+                <option value="">Select time</option>
+                <option>12:00 PM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>6:00 PM</option>
+                <option>7:00 PM</option>
+                <option>8:00 PM</option>
+                <option>9:00 PM</option>
+                <option>10:00 PM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Guests</label>
+            <select required>
+                <option value="">Number of guests</option>
+                <option>1 Person</option>
+                <option>2 People</option>
+                <option>3 People</option>
+                <option>4 People</option>
+                <option>5-8 People</option>
+                <option>9+ People</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+    </form>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo">POSH <span>Cuisine</span></div>
+            <p>Owerri's premier destination for fine dining, artisan cocktails, and sophisticated nightlife. Where luxury meets flavor.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menu">Our Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h5>Contact</h5>
+            <ul>
+                <li><a href="#">Owerri, Imo State, Nigeria</a></li>
+                <li><a href="tel:+234">+234 XXX XXX XXXX</a></li>
+                <li><a href="mailto:info@poshcuisine.com">info@poshcuisine.com</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h5>Hours</h5>
+            <ul>
+                <li><a href="#">Mon - Thu: 12PM - 11PM</a></li>
+                <li><a href="#">Fri - Sat: 12PM - 2AM</a></li>
+                <li><a href="#">Sunday: 2PM - 10PM</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Posh Cuisine & Lounge. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="Facebook">FB</a>
+            <a href="#" title="Twitter">X</a>
+            <a href="#" title="TikTok">TK</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Menu filter
+    function filterMenu(category, btn) {
+        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cards = document.querySelectorAll('.menu-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeUp 0.5s ease-out';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Testimonial slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    // Auto-slide testimonials
+    setInterval(() => {
+        const next = (currentSlide + 1) % slides.length;
+        goToSlide(next);
+    }, 5000);
+
+    // Reservation form
+    function handleReservation(e) {
+        e.preventDefault();
+        alert('Thank you! Your reservation request has been received. We will contact you shortly to confirm.');
+        e.target.reset();
+    }
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '100%';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.background = 'rgba(15,15,15,0.98)';
+        navLinks.style.padding = '2rem';
+        navLinks.style.gap = '1.5rem';
+        navLinks.style.backdropFilter = 'blur(20px)';
+    }
+</script>
+
+</body>
+</html>
